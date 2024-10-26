@@ -70,9 +70,6 @@ namespace Beluga
 
             gameObject.GetComponent<LightingController>().state = LightingController.LightingState.Damaged;
 
-            // TODO disable emission on the wrecked model
-
-
             //disable dock handtargets
             var seamothDock = transform.Find("SeamothDock").gameObject;
             var prawnDock = transform.Find("Prawndock").gameObject;
@@ -96,8 +93,6 @@ namespace Beluga
             worldForces.underwaterGravity = 4f;
 
             vfxcontroller.StopAndDestroy(0, 1f);
-
-            yield return null;
         }
 
         private IEnumerator waitWhileDestabilizingRoll(float time)
@@ -132,6 +127,41 @@ namespace Beluga
             transform.Find("Model/HUDFastSpeedInt").gameObject.SetActive(false);
             transform.Find("Model/HUDEmptyInt").gameObject.SetActive(false);
             transform.Find("Model/HUDEngineToggleInt").gameObject.SetActive(false);
+        }
+
+        public void DestroyVehicleInstantly()
+        {
+            stabilizeRoll = false;
+
+            TryDetachPrawnWithoutPlayer();
+            TryDetachSeamothWithoutPlayer();
+
+            engineSoundEmitter.engineOn = false;
+
+            PlayerExit();
+            ScuttleVehicle();
+
+            gameObject.GetComponent<LightingController>().state = LightingController.LightingState.Damaged;
+
+            //disable dock handtargets
+            var seamothDock = transform.Find("SeamothDock").gameObject;
+            var prawnDock = transform.Find("Prawndock").gameObject;
+            seamothDock.SetActive(false);
+            prawnDock.SetActive(false);
+
+            // switch to destroyed model and colliders
+            unwreckedModel.SetActive(false);
+            unwreckedColliders.SetActive(false);
+            wreckedModel.SetActive(true);
+
+            engineLight.SetActive(false);
+
+            // sink
+            worldForces.enabled = true;
+            worldForces.handleGravity = true;
+            worldForces.underwaterGravity = 4f;
+
+            vfxcontroller.StopAndDestroy(0, 1f);
         }
     }
 }

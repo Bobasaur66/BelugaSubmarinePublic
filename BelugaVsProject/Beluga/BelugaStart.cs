@@ -43,16 +43,7 @@ namespace Beluga
 
             disableshield();
 
-            unscrabbledocking();
-
-            savestuff();
-            
-        }
-        public void savestuff() 
-        {
-            AttachcontainerwithoutAnimation(currentSeaMoth);
-           
-        
+            unscrabbledocking();            
         }
 
 
@@ -79,6 +70,8 @@ namespace Beluga
             (Beluga as Beluga).AssignUnaffectedLights();
 
             model.EnsureComponent<BelugaVoicelineManager>();
+
+            model.EnsureComponent<BelugaSaveDataHandler>();
 
             model.FindChild("EngineSounds").EnsureComponent<BelugaEngineFMODEmitter>();
 

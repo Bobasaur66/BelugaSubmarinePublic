@@ -10,13 +10,24 @@ namespace Beluga
 {
     public class SavingShit : SaveDataCache
     {
-        // Beluga, current seamoth, current prawn, lighting state, shield state, engine on/off, engine speed, destroyed true/false
-        public List<Tuple<Beluga, SeaMoth, Exosuit, LightingController.LightingState, bool, bool>> belugaSaveData;
+        // beluga prefab identifier id, 
+        public Dictionary<string, BelugaSaveData> belugasSaved;
     }
 
-    
+    public class BelugaSaveData
+    {
+        public string seamothPrefabIdentifierId;
+
+        public string exosuitPrefabIdentifierId;
+
+        public LightingController.LightingState lightingState;
+
+        public bool shieldActive;
+
+        public bool destroyed;
 
 
+    }
 }
 
 

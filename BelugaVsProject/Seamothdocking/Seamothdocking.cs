@@ -177,7 +177,7 @@ namespace Beluga
             if (!hasStarted2)
             {
                 hasStarted2 = true;
-                StartCoroutine(Seamothdocking(container, Seamothtrigger, seamothdocked, 2.5f, 1.6f));
+                StartCoroutine(Seamothdocking(container, Seamothtrigger, seamothdocked, 1f, 1f));
             }
             
 
@@ -285,8 +285,11 @@ namespace Beluga
             savedseamoth.EnterVehicle(Player.main, true, true);
 
             yield return new WaitForSeconds(2f);
-            StartCoroutine(MoveAndRotate(savedseamoth, Seamothtrigger, 2f));
-            yield return new WaitForSeconds(0.5f);
+            // blizzard this exit animation breaks the adding of the force because it sometimes 
+            // hits the docking doors
+            // imo it also breaks the illusion of being ejected out, and kinda doesn't match the sound too
+            //StartCoroutine(MoveAndRotate(savedseamoth, Seamothtrigger, 2f));
+            //yield return new WaitForSeconds(0.5f);
 
             BelugaUtils.PlayFMODSound("undock", savedseamoth.transform);
             savedseamoth.crushDamage.enabled = true;
@@ -362,7 +365,6 @@ namespace Beluga
             Logger.Log("4");
             savedseamoth.useRigidbody.velocity = Vector3.zero;
             Logger.Log("5");
-            StartCoroutine(MoveAndRotate(savedseamoth, Seamothtrigger, 0.7f));
             
             savedseamoth.useRigidbody.isKinematic = false;
             Logger.Log("6");

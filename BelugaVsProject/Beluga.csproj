@@ -115,9 +115,9 @@
     <Compile Include="AudioShit\VoicelinesInfo.cs" />
     <Compile Include="Beluga\Beluga.cs" />
     <Compile Include="Beluga\BelugaAnimations.cs" />
+    <Compile Include="Beluga\BelugaSaveDataHandler.cs" />
     <Compile Include="Beluga\Belugashield.cs" />
     <Compile Include="Beluga\BelugaSteeringwheel.cs" />
-    <Compile Include="Beluga\SaveStuff.cs" />
     <Compile Include="Beluga\Color.cs" />
     <Compile Include="Components\ThermalRepairer.cs" />
     <Compile Include="Patches\Compatabilitypatches\BloopBlazapatch.cs" />

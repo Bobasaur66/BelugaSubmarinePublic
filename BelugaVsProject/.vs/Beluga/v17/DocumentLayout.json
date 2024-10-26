@@ -3,24 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|c:\\users\\aaron\\documents\\github\\atlassubmarinemod\\beluga\\belugavsproject\\mainpatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|solutionrelative:mainpatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\savingshit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|solutionrelative:savingshit.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\pilotingshenanigans\\belugaengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|solutionrelative:pilotingshenanigans\\belugaengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\beluga\\belugastart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|solutionrelative:beluga\\belugastart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\utility\\saveutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|solutionrelative:utility\\saveutils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|c:\\users\\aaron\\documents\\github\\atlassubmarinemod\\beluga\\belugavsproject\\prawndocking\\prawndocking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|solutionrelative:prawndocking\\prawndocking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -50,64 +34,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SaveUtils.cs",
-              "DocumentMoniker": "C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\Utility\\SaveUtils.cs",
-              "RelativeDocumentMoniker": "Utility\\SaveUtils.cs",
-              "ToolTip": "C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\Utility\\SaveUtils.cs",
-              "RelativeToolTip": "Utility\\SaveUtils.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T11:20:58.694Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "BelugaStart.cs",
-              "DocumentMoniker": "C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\Beluga\\BelugaStart.cs",
-              "RelativeDocumentMoniker": "Beluga\\BelugaStart.cs",
-              "ToolTip": "C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\Beluga\\BelugaStart.cs",
-              "RelativeToolTip": "Beluga\\BelugaStart.cs",
-              "ViewState": "AgIAACgAAAAAAAAAAAAgwDYAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T09:57:24.031Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BelugaEngine.cs",
-              "DocumentMoniker": "C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\PilotingShenanigans\\BelugaEngine.cs",
-              "RelativeDocumentMoniker": "PilotingShenanigans\\BelugaEngine.cs",
-              "ToolTip": "C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\PilotingShenanigans\\BelugaEngine.cs",
-              "RelativeToolTip": "PilotingShenanigans\\BelugaEngine.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAiwBAAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-19T09:30:38.113Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MainPatcher.cs",
-              "DocumentMoniker": "C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\MainPatcher.cs",
-              "RelativeDocumentMoniker": "MainPatcher.cs",
-              "ToolTip": "C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\MainPatcher.cs",
-              "RelativeToolTip": "MainPatcher.cs",
-              "ViewState": "AgIAAH8AAAAAAAAAAAAQwJMAAAAyAAAAAAAAAA==",
+              "Title": "Prawndocking.cs",
+              "DocumentMoniker": "C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\Prawndocking\\Prawndocking.cs",
+              "RelativeDocumentMoniker": "Prawndocking\\Prawndocking.cs",
+              "ToolTip": "C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\Prawndocking\\Prawndocking.cs",
+              "RelativeToolTip": "Prawndocking\\Prawndocking.cs",
+              "ViewState": "AgIAAMcAAAAAAAAAAAAawNMAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-24T11:57:54.635Z",
+              "WhenOpened": "2024-10-23T10:31:14.782Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SavingShit.cs",
-              "DocumentMoniker": "C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\SavingShit.cs",
-              "RelativeDocumentMoniker": "SavingShit.cs",
-              "ToolTip": "C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\SavingShit.cs",
-              "RelativeToolTip": "SavingShit.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAByAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-24T10:58:31.698Z"
             }
           ]
         }

@@ -88,68 +88,26 @@ namespace Beluga
             // register console commands
             ConsoleCommandsHandler.RegisterConsoleCommands(typeof(ConsoleCommands));
 
-            // register all upgrades
+            // register beluga's upgrades
             RegisterAllUpgrades();
 
             // add the ency for the beluga
             AddEncy();
 
-            // register save data
-            DoSaveDataStuff();
+            // save data stuff
+            RegisterSaveData();
         }
 
 
 
-        public void DoSaveDataStuff()
+        public void RegisterSaveData()
         {
             save = SaveDataHandler.RegisterSaveDataCache<SavingShit>();
 
-            save.OnStartedSaving += (object sender, JsonFileEventArgs e) =>
-            {
-                SavingShit data = e.Instance as SavingShit;
-
-                List<Tuple<Beluga, SeaMoth, Exosuit, LightingController.LightingState, bool, bool>> saveList = new List<Tuple<Beluga, SeaMoth, Exosuit, LightingController.LightingState, bool, bool>>();
-
-                foreach (Beluga beluga in Belugamanager.main.AllBeluga)
-                {
-                    BelugaEngine engine = beluga.GetComponent<ModVehicleEngine>() as BelugaEngine;
-
-                    SeaMoth seamoth = beluga.currentSeaMoth;
-                    Exosuit exosuit = beluga.currentprawn;
-                    LightingController.LightingState lightingState = beluga.GetComponent<LightingController>().state;
-                    bool shield = beluga.shielded;
-                    bool destroyed = beluga.isScuttled;
-
-                    Tuple<Beluga, SeaMoth, Exosuit, LightingController.LightingState, bool, bool> newData = new Tuple<Beluga, SeaMoth, Exosuit, LightingController.LightingState, bool, bool>(beluga, seamoth, exosuit, lightingState, shield, destroyed);
-                    saveList.Add(newData);
-                }
-
-                data.belugaSaveData = saveList;
-            };
-
-            save.OnFinishedLoading += (object sender, JsonFileEventArgs e) =>
-            {
-                save = e.Instance as SavingShit;
-
-                foreach (var tuple in save.belugaSaveData)
-                {
-                    Beluga beluga = tuple.Item1;
-                    SeaMoth seamoth = tuple.Item2;
-                    Exosuit exosuit = tuple.Item3;
-                    LightingController.LightingState lightingState = tuple.Item4;
-                    bool shield = tuple.Item5;
-                    bool destroyed = tuple.Item6;
-
-                    beluga.currentSeaMoth = seamoth;
-                    beluga.currentprawn = exosuit;
-                    beluga.GetComponent<LightingController>().state = lightingState;
-                    beluga.shielded = shield;
-
-                    beluga.isScuttled = destroyed;
-                }
-
-
-            };
+            save.OnStartedSaving += BelugaSaveDataHandler.OnStartedSaving();
+            save.OnFinishedSaving += BelugaSaveDataHandler.OnFinishedSaving();
+            save.OnStartedLoading += BelugaSaveDataHandler.OnStartedLoading();
+            save.OnFinishedLoading += BelugaSaveDataHandler.OnFinishedLoading();
         }
 
 

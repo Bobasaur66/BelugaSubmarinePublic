@@ -15,7 +15,7 @@ namespace Beluga
         {
             if (GameInput.GetButtonDown(GameInput.Button.LeftHand))
             {
-                Beluga closest = Belugamanager.main.FindNearestBeluga(this.transform.position);
+                Beluga closest = Belugamanager.FindNearestBeluga(this.transform.position);
                 Exosuit container = closest.currentprawn;
                 if (container != null)
                 {

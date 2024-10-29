@@ -127,7 +127,7 @@
     <Compile Include="Interfaces\ICyclopsReferencer.cs" />
     <Compile Include="PilotingShenanigans\Belugacameras.cs" />
     <Compile Include="Beluga\BelugaDeath.cs" />
-    <Compile Include="SavingShit.cs" />
+    <Compile Include="SaveData.cs" />
     <Compile Include="Upgrades\BelugaSpeedUpgradeModule.cs" />
     <Compile Include="Upgrades\BelugaThermalRepairModule.cs" />
     <Compile Include="Utility\Belugamanager.cs" />
@@ -146,7 +146,6 @@
     <Compile Include="Prawndocking\Prawndocking.cs" />
     <Compile Include="Prawndocking\Prawnmanager.cs" />
     <Compile Include="Patches\Patches\Prawnpatch.cs" />
-    <Compile Include="Utility\SaveUtils.cs" />
     <Compile Include="VFX\PropCannonBeamFX.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seamothdocking\Seamothdocking.cs" />

@@ -252,7 +252,7 @@ namespace Beluga
         {
             BelugaUtils.PlayFMODSound("buttonon", Player.main.transform);
 
-            var beluga = Belugamanager.main.closestBeluga();
+            var beluga = Belugamanager.closestBeluga();
             if (beluga.shielded) 
             {
                 beluga.disableshield();

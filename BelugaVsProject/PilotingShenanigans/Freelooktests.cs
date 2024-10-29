@@ -65,7 +65,7 @@ namespace Beluga
                 float deadzone = 20f / 100f;
                 bool triggerState = (Input.GetAxisRaw("ControllerAxis3") > deadzone) || (Input.GetAxisRaw("ControllerAxis3") < -deadzone);
 
-                ExecuteFreeLook(Belugamanager.main.closestBeluga());
+                ExecuteFreeLook(Belugamanager.closestBeluga());
 
                 if (triggerState && !wasFreelyPilotingLastFrame)
                 {

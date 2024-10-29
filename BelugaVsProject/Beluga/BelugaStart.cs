@@ -20,7 +20,7 @@ namespace Beluga
         {
             base.Start();
 
-            Belugamanager.main.RegisterBeluga(this);
+            Belugamanager.RegisterBeluga(this);
 
             // mute vehicle framework's voice and engine so we can add our own
             voice.balance = 0f;
@@ -71,7 +71,7 @@ namespace Beluga
 
             model.EnsureComponent<BelugaVoicelineManager>();
 
-            model.EnsureComponent<BelugaSaveDataHandler>();
+            model.EnsureComponent<BelugaSaveHandler>();
 
             model.FindChild("EngineSounds").EnsureComponent<BelugaEngineFMODEmitter>();
 

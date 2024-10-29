@@ -17,7 +17,7 @@ namespace Beluga.Commands
         {
             Vector3 playerPos = Player.main.transform.position;
 
-            GameObject nearestBeluga = Belugamanager.main.FindNearestBeluga(playerPos).gameObject;
+            GameObject nearestBeluga = Belugamanager.FindNearestBeluga(playerPos).gameObject;
 
             if (nearestBeluga.GetComponent<Beluga>().isScuttled)
             {

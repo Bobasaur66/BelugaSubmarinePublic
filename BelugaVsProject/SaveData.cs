@@ -8,13 +8,13 @@ using UnityEngine;
 
 namespace Beluga
 {
-    public class SavingShit : SaveDataCache
+    public class SaveData : SaveDataCache
     {
-        // beluga prefab identifier id, 
-        public Dictionary<string, BelugaSaveData> belugasSaved;
+        // dictionary of saved belugas (prefab id, data)
+        public Dictionary<string, BelugaData> belugasSaved;
     }
 
-    public class BelugaSaveData
+    public class BelugaData
     {
         public string seamothPrefabIdentifierId;
 

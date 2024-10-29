@@ -21,7 +21,7 @@ namespace Beluga.Compatabilitypatches
             [HarmonyPatch("CanAttackTargetFromPosition")]
             public static bool OntouchPrefix(BloopMeleeAttack __instance, bool __result)
             {
-            if (Vector3.Distance(__instance.transform.position, Belugamanager.main.closestBeluga().transform.position) < 50)
+            if (Vector3.Distance(__instance.transform.position, Belugamanager.closestBeluga().transform.position) < 50)
             {
                 __result = false;
                 return false;

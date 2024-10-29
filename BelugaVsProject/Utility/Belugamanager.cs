@@ -11,15 +11,8 @@ namespace Beluga
     {
         public static bool agilityflag = false;
         public static bool craftflag = false;
-        public static Belugamanager main
-        {
-            get
-            {
-                return Player.main.gameObject.EnsureComponent<Belugamanager>();
-            }
-        }
-        public List<Beluga> AllBeluga = new List<Beluga>();
-        public Beluga FindNearestBeluga(Vector3 mount)
+        public static List<Beluga> AllBeluga = new List<Beluga>();
+        public static Beluga FindNearestBeluga(Vector3 mount)
         {
             float ComputeDistance(Beluga cc)
             {
@@ -47,7 +40,7 @@ namespace Beluga
             
             return nearestContainer;
         }
-        public Beluga closestBeluga()
+        public static Beluga closestBeluga()
         {
             float ComputeDistance(Beluga cc)
             {
@@ -75,11 +68,11 @@ namespace Beluga
 
             return nearestContainer;
         }
-        public void RegisterBeluga(Beluga cont)
+        public static void RegisterBeluga(Beluga cont)
         {
             AllBeluga.Add(cont);
         }
-        public void DeregisterBeluga(Beluga cont)
+        public static void DeregisterBeluga(Beluga cont)
         {
             AllBeluga.Remove(cont);
         }

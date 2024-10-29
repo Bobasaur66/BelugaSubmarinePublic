@@ -34,7 +34,7 @@ namespace Beluga
             if (isScuttled) return;
 
 
-            Beluga thisBeluga = Belugamanager.main.FindNearestBeluga(Player.main.transform.position);
+            Beluga thisBeluga = Belugamanager.FindNearestBeluga(Player.main.transform.position);
 
             if (thisBeluga.targetHatchDoors != thisBeluga.hatchDoorsOpen)
             {
@@ -84,7 +84,7 @@ namespace Beluga
 
         public void InstantHatchDoors(bool open)
         {
-            Beluga thisBeluga = Belugamanager.main.FindNearestBeluga(Player.main.transform.position);
+            Beluga thisBeluga = Belugamanager.FindNearestBeluga(Player.main.transform.position);
 
             Quaternion targetRotationRight = open ? thisBeluga.hatchDoorRightOpenRotation : thisBeluga.hatchDoorsClosedRotation;
             Quaternion targetRotationLeft = open ? thisBeluga.hatchDoorLeftOpenRotation : thisBeluga.hatchDoorsClosedRotation;
@@ -123,7 +123,7 @@ namespace Beluga
             if (isScuttled) return;
 
 
-            Beluga thisBeluga = Belugamanager.main.FindNearestBeluga(Player.main.transform.position);
+            Beluga thisBeluga = Belugamanager.FindNearestBeluga(Player.main.transform.position);
 
             if (thisBeluga.targetDockFrontDoors != thisBeluga.dockFrontDoorsOpen)
             {
@@ -177,7 +177,7 @@ namespace Beluga
 
         public void InstantDockFrontDoors(bool open)
         {
-            Beluga thisBeluga = Belugamanager.main.FindNearestBeluga(Player.main.transform.position);
+            Beluga thisBeluga = Belugamanager.FindNearestBeluga(Player.main.transform.position);
 
             Quaternion targetRotationRight = open ? thisBeluga.dockFrontDoorRightOpenRotation : thisBeluga.dockFrontDoorsClosedRotation;
             Quaternion targetRotationLeft = open ? thisBeluga.dockFrontDoorLeftOpenRotation : thisBeluga.dockFrontDoorsClosedRotation;
@@ -193,7 +193,7 @@ namespace Beluga
 
         public void setCollidersFrontDockDoors(bool active)
         {
-            Beluga thisBeluga = Belugamanager.main.FindNearestBeluga(Player.main.transform.position);
+            Beluga thisBeluga = Belugamanager.FindNearestBeluga(Player.main.transform.position);
 
             thisBeluga.dockFrontDoorLeftExt.FindChild("Collider").SetActive(active);
             thisBeluga.dockFrontDoorRightExt.FindChild("Collider").SetActive(active);
@@ -230,7 +230,7 @@ namespace Beluga
             if (isScuttled) return;
 
 
-            Beluga thisBeluga = Belugamanager.main.FindNearestBeluga(Player.main.transform.position);
+            Beluga thisBeluga = Belugamanager.FindNearestBeluga(Player.main.transform.position);
 
             if (thisBeluga.targetDockBackDoors != thisBeluga.dockBackDoorsOpen)
             {
@@ -284,7 +284,7 @@ namespace Beluga
 
         public void InstantDockBackDoors(bool open)
         {
-            Beluga thisBeluga = Belugamanager.main.FindNearestBeluga(Player.main.transform.position);
+            Beluga thisBeluga = Belugamanager.FindNearestBeluga(Player.main.transform.position);
 
             Quaternion targetRotationRight = open ? thisBeluga.dockBackDoorRightOpenRotation : thisBeluga.dockBackDoorsClosedRotation;
             Quaternion targetRotationLeft = open ? thisBeluga.dockBackDoorLeftOpenRotation : thisBeluga.dockBackDoorsClosedRotation;
@@ -300,7 +300,7 @@ namespace Beluga
 
         public void setCollidersBackDockDoors(bool active)
         {
-            Beluga thisBeluga = Belugamanager.main.FindNearestBeluga(Player.main.transform.position);
+            Beluga thisBeluga = Belugamanager.FindNearestBeluga(Player.main.transform.position);
 
             thisBeluga.dockBackDoorLeftExt.FindChild("Collider").SetActive(active);
             thisBeluga.dockBackDoorRightExt.FindChild("Collider").SetActive(active);

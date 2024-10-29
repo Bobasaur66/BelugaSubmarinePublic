@@ -26,7 +26,13 @@ namespace Beluga
                 return transform.Find("Model/HullMainExt").gameObject;
             }
         }
-
+        public GameObject Textstuff
+        {
+            get {
+                return transform.Find("TextStuff").gameObject;
+            
+            }
+        }
         public override GameObject ColorPicker
         {
             get
@@ -34,6 +40,8 @@ namespace Beluga
                 return transform.Find("ColorPicker").gameObject;
             }
         }
+
+
         public override void PaintVehicleSection(string materialName, Color col)
         {
             foreach (Renderer thisRend in GetComponentsInChildren<Renderer>())
@@ -88,7 +96,13 @@ namespace Beluga
 
         public override void PaintVehicleName(string name, Color nameColor, Color hullColor)
         {
-            base.PaintVehicleName(name, nameColor, hullColor);
+            var tmprougui = Textstuff.GetComponent<TMPro.TMP_Text>();
+            tmprougui.font = Nautilus.Utility.FontUtils.Aller_Rg;
+            tmprougui.text = name;
+            tmprougui.fontSize = 32;
+            tmprougui.color = nameColor;
+            tmprougui.alignment = TMPro.TextAlignmentOptions.Center;
+            tmprougui.enableAutoSizing = true;
         }
         public override void PaintNameDefaultStyle(string name)
         {

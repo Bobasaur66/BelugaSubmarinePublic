@@ -59,7 +59,7 @@ namespace Beluga
     public class MainPatcher : BaseUnityPlugin
     {
         public static AssetBundle theUltimateBundleOfAssets;
-        public static SavingShit save { get; private set; }
+        public static SaveData save { get; private set; } = SaveDataHandler.RegisterSaveDataCache<SaveData>();
 
         public void Start()
         {
@@ -102,12 +102,10 @@ namespace Beluga
 
         public void RegisterSaveData()
         {
-            save = SaveDataHandler.RegisterSaveDataCache<SavingShit>();
-
-            save.OnStartedSaving += BelugaSaveDataHandler.OnStartedSaving();
-            save.OnFinishedSaving += BelugaSaveDataHandler.OnFinishedSaving();
-            save.OnStartedLoading += BelugaSaveDataHandler.OnStartedLoading();
-            save.OnFinishedLoading += BelugaSaveDataHandler.OnFinishedLoading();
+            save.OnStartedSaving += BelugaSaveHandler.OnStartedSaving();
+            save.OnFinishedSaving += BelugaSaveHandler.OnFinishedSaving();
+            save.OnStartedLoading += BelugaSaveHandler.OnStartedLoading();
+            save.OnFinishedLoading += BelugaSaveHandler.OnFinishedLoading();
         }
 
 

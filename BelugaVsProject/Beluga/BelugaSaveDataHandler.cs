@@ -10,13 +10,13 @@ using UnityEngine;
 
 namespace Beluga
 {
-    internal class BelugaSaveDataHandler : MonoBehaviour
+    internal class BelugaSaveHandler : MonoBehaviour
     {
         internal static EventHandler<JsonFileEventArgs> OnStartedSaving()
         {
-            Dictionary<string, BelugaSaveData> save = new Dictionary<string, BelugaSaveData>();
+            Dictionary<string, BelugaData> save = new Dictionary<string, BelugaData>();
 
-            foreach (Beluga beluga in Belugamanager.main.AllBeluga)
+            foreach (Beluga beluga in Belugamanager.AllBeluga)
             {
                 string prefabIdentifierId = beluga.GetComponent<PrefabIdentifier>().id;
                 string seamothId = "";
@@ -41,7 +41,7 @@ namespace Beluga
                 destructed = beluga.isScuttled;
 
 
-                BelugaSaveData saveData = new BelugaSaveData();
+                BelugaData saveData = new BelugaData();
                 saveData.seamothPrefabIdentifierId = seamothId;
                 saveData.exosuitPrefabIdentifierId= exosuitId;
                 saveData.lightingState = lightingState;
@@ -66,9 +66,9 @@ namespace Beluga
 
         internal static EventHandler<JsonFileEventArgs> OnFinishedLoading()
         {
-            Dictionary<string, BelugaSaveData> save = MainPatcher.save.belugasSaved;
+            Dictionary<string, BelugaData> save = MainPatcher.save.belugasSaved;
 
-            foreach (Beluga beluga in Belugamanager.main.AllBeluga)
+            foreach (Beluga beluga in Belugamanager.AllBeluga)
             {
                 string id = beluga.GetComponent<PrefabIdentifier>().id;
 
@@ -79,7 +79,7 @@ namespace Beluga
                         continue;
                     }
 
-                    BelugaSaveData saveData = save[id];
+                    BelugaData saveData = save[id];
 
 
                     SeaMoth seamoth = null;

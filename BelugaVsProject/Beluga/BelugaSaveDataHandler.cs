@@ -14,41 +14,50 @@ namespace Beluga
     {
         internal static EventHandler<JsonFileEventArgs> OnStartedSaving()
         {
-            Dictionary<string, BelugaData> save = new Dictionary<string, BelugaData>();
-
-            foreach (Beluga beluga in Belugamanager.AllBeluga)
+            if (Belugamanager.AllBeluga.Count == 0)
             {
-                string prefabIdentifierId = beluga.GetComponent<PrefabIdentifier>().id;
-                string seamothId = "";
-                string exosuitId = "";
-                LightingController.LightingState lightingState;
-                bool shield;
-                bool destructed;
+                MainPatcher.save.belugasSaved = null;
+            }
+            else
+            {
+                Dictionary<string, BelugaData> save = new Dictionary<string, BelugaData>();
 
-                if (beluga.currentSeaMoth)
+                foreach (Beluga beluga in Belugamanager.AllBeluga)
                 {
-                    seamothId = beluga.currentSeaMoth.GetComponent<PrefabIdentifier>().id;
+                    string prefabIdentifierId = beluga.GetComponent<PrefabIdentifier>().id;
+                    string seamothId = "";
+                    string exosuitId = "";
+                    LightingController.LightingState lightingState;
+                    bool shield;
+                    bool destructed;
+
+                    if (beluga.currentSeaMoth)
+                    {
+                        seamothId = beluga.currentSeaMoth.GetComponent<PrefabIdentifier>().id;
+                    }
+                    if (beluga.currentprawn)
+                    {
+                        exosuitId = beluga.currentprawn.GetComponent<PrefabIdentifier>().id;
+                    }
+
+                    lightingState = beluga.GetComponent<LightingController>().state;
+
+                    shield = beluga.shielded;
+
+                    destructed = beluga.isScuttled;
+
+
+                    BelugaData saveData = new BelugaData();
+                    saveData.seamothPrefabIdentifierId = seamothId;
+                    saveData.exosuitPrefabIdentifierId = exosuitId;
+                    saveData.lightingState = lightingState;
+                    saveData.shieldActive = shield;
+                    saveData.destroyed = destructed;
+
+                    save.Add(prefabIdentifierId, saveData);
+
+                    MainPatcher.save.belugasSaved = save;
                 }
-                if (beluga.currentprawn)
-                {
-                    exosuitId = beluga.currentprawn.GetComponent<PrefabIdentifier>().id;
-                }
-
-                lightingState = beluga.GetComponent<LightingController>().state;
-
-                shield = beluga.shielded;
-
-                destructed = beluga.isScuttled;
-
-
-                BelugaData saveData = new BelugaData();
-                saveData.seamothPrefabIdentifierId = seamothId;
-                saveData.exosuitPrefabIdentifierId= exosuitId;
-                saveData.lightingState = lightingState;
-                saveData.shieldActive = shield;
-                saveData.destroyed = destructed;
-
-                save.Add(prefabIdentifierId, saveData);
             }
 
             return null;

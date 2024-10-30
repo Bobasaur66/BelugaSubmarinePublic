@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|c:\\users\\aaron\\documents\\github\\atlassubmarinemod\\beluga\\belugavsproject\\savedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|solutionrelative:savedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|c:\\users\\aaron\\documents\\github\\atlassubmarinemod\\beluga\\belugavsproject\\beluga\\belugasavedatahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|solutionrelative:beluga\\belugasavedatahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|c:\\users\\aaron\\documents\\github\\atlassubmarinemod\\beluga\\belugavsproject\\mainpatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\mainpatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|solutionrelative:mainpatcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|c:\\users\\aaron\\documents\\github\\atlassubmarinemod\\beluga\\belugavsproject\\savedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7540FD3E-7353-4B10-B596-FFE5C0B691D3}|Beluga.csproj|solutionrelative:savedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,11 +22,40 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "BelugaSaveDataHandler.cs",
+              "DocumentMoniker": "C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\Beluga\\BelugaSaveDataHandler.cs",
+              "RelativeDocumentMoniker": "Beluga\\BelugaSaveDataHandler.cs",
+              "ToolTip": "C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\Beluga\\BelugaSaveDataHandler.cs",
+              "RelativeToolTip": "Beluga\\BelugaSaveDataHandler.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAUwA8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-30T07:58:09.594Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "SaveData.cs",
               "DocumentMoniker": "C:\\Users\\Aaron\\Documents\\GitHub\\AtlasSubmarineMod\\Beluga\\BelugaVsProject\\SaveData.cs",
               "RelativeDocumentMoniker": "SaveData.cs",
@@ -45,22 +78,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-29T10:29:47.866Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             }
           ]
         }

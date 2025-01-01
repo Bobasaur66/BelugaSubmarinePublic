@@ -14,6 +14,7 @@ namespace Beluga
 
 
     {
+        
         public Transform seamothdocked
         {
             get
@@ -48,14 +49,14 @@ namespace Beluga
 
             if (!IsPowered())
             {
-                return;
+               // return;
             }
             if (currentSeaMoth == null)
             {
-                if (Player.main.currentSub == null)
-                {
+                
+                
                     TryAttachSeamoth();
-                }
+                
             }
             else
             {
@@ -70,6 +71,19 @@ namespace Beluga
                 currentSeaMoth.collisionModel.SetActive(false);
                 currentSeaMoth.UpdateCollidersForDocking(true);
                 currentSeaMoth.toggleLights.SetLightsActive(false);
+                if (this.GetPercentageOfPower() > 1)
+                {
+                    float energy;
+                    float capacity;
+                    currentSeaMoth.GetEnergyValues(out energy, out capacity);
+                    if (energy < capacity)
+                    {
+                        this.ConsumeEnergy(-2);
+                        currentSeaMoth.AddEnergy(2);
+
+                    }
+
+                }
                 if (!detachflag2)
                 {
                     targetDockFrontDoors = false;
@@ -134,7 +148,12 @@ namespace Beluga
             {
                 return false;
             }
-
+            if (Vector3.Distance(seamothdocked.position, container.transform.position) < 0.5)
+            {
+                //Logger.Log("ehjgoehrgiozesoigzhroesiuzgoieuszrgfiousezgro8uizesrigouzesoizg");
+                currentSeaMoth = container;
+                return false;
+            }
             if (Vector3.Distance(seamothdocked.position, container.transform.position) < 20 && detachflag2 == false)
             {
                 targetDockFrontDoors = true;
@@ -179,9 +198,9 @@ namespace Beluga
                 hasStarted2 = true;
                 StartCoroutine(Seamothdocking(container, Seamothtrigger, seamothdocked, 1f, 1f));
             }
-            
 
-
+            container.toggleLights.SetLightsActive(false);
+            container.transform.SetParent(this.transform);
 
 
 
@@ -260,7 +279,7 @@ namespace Beluga
             Logger.Log("2");
             
             Logger.Log("3");
-            savedseamoth.liveMixin.shielded = true;
+            savedseamoth.liveMixin.shielded = false;
             Logger.Log("4");
             savedseamoth.useRigidbody.velocity = Vector3.zero;
             Logger.Log("5");
@@ -268,7 +287,7 @@ namespace Beluga
             
             savedseamoth.useRigidbody.isKinematic = false;
             Logger.Log("6");
-            
+            savedseamoth.transform.SetParent(this.transform.parent);
             
             Logger.Log("8");
 
@@ -359,9 +378,9 @@ namespace Beluga
             Logger.Log("1");
             //currentMount.collisionModel.SetActive(true);
             Logger.Log("2");
-
+            savedseamoth.transform.SetParent(this.transform.parent);
             Logger.Log("3");
-            savedseamoth.liveMixin.shielded = true;
+            savedseamoth.liveMixin.shielded = false;
             Logger.Log("4");
             savedseamoth.useRigidbody.velocity = Vector3.zero;
             Logger.Log("5");

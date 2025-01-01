@@ -39,7 +39,7 @@ namespace Beluga
 
         public bool Prawnload = true;
         public int counter = 0;
-
+        
         public void prawndockupdate() 
         {
             /*if (Prawnload)
@@ -50,25 +50,44 @@ namespace Beluga
             
             if (!IsPowered())
             {
-                return;
+                //return;
             }
             if (currentprawn == null)
             {
-                if (Player.main.currentSub == null)
-                {
-                    TryAttachPrawn();
-                }
+
+
+               TryAttachPrawn(); 
+                
             }
             else 
             {
-
+                
                 currentprawn.transform.position = prawndocked.position;
                 currentprawn.transform.rotation = prawndocked.rotation;
                 currentprawn.liveMixin.shielded = true;
+                
+                //savedprawn.mainAnimator.SetBool("sit", true);
                 //bloederroboter.collisionModel.SetActive(false);
                 currentprawn.useRigidbody.isKinematic = true;
                 currentprawn.crushDamage.enabled = false;
                 currentprawn.UpdateCollidersForDocking(true);
+                //currentprawn.collisionModel.active = false;
+                
+                
+                if (this.GetPercentageOfPower() > 1)
+                {
+                    float energy;
+                    float capacity;
+                    currentprawn.GetEnergyValues(out energy, out capacity);
+                    if (energy < capacity) 
+                    {
+                        this.ConsumeEnergy(-2);
+                        currentprawn.AddEnergy(2);
+                    
+                    }
+
+                }
+
                 if (!detachflag)
                 {
                     targetDockBackDoors = false;
@@ -98,26 +117,34 @@ namespace Beluga
             Exosuit container = PrawnManager.main.FindNearestPrawn(prawndocked.transform.position);
             
             if (container == null) { return; }
-            
-            if (Vector3.Distance(Prawntrigger.position, container.transform.position) > 6 && detachflag == true)
+            /*if (container.transform.parent == this.transform)
             {
-                detachflag = false;
-                GetComponent<TetherSource>().isLive = true;
+                container = currentprawn;
 
             }
-            
-            if (detachflag == true) {
-                return;
-            
-            }
-            
-            if (!ValidateAttachment(container))
-            {
+            else
+            {*/
+                if (Vector3.Distance(Prawntrigger.position, container.transform.position) > 6 && detachflag == true)
+                {
+                    detachflag = false;
+                    GetComponent<TetherSource>().isLive = true;
 
-                return;
-            }
-            
-            AttachContainer(container);
+                }
+
+                if (detachflag == true)
+                {
+                    return;
+
+                }
+
+                if (!ValidateAttachment(container))
+                {
+
+                    return;
+                }
+
+                AttachContainer(container);
+            //}
 
 
         }
@@ -127,7 +154,12 @@ namespace Beluga
             {
                 return false;
             }
-            
+            if (Vector3.Distance(prawndocked.position, container.transform.position) < 0.5)
+            {
+                //Logger.Log("ehjgoehrgiozesoigzhroesiuzgoieuszrgfiousezgro8uizesrigouzesoizg");
+                currentprawn = container;
+                return false;
+            }
             if (Vector3.Distance(prawndocked.position, container.transform.position) < 20 && detachflag == false)
             {
                 targetDockBackDoors = true;
@@ -162,9 +194,9 @@ namespace Beluga
             Prawn.useRigidbody.isKinematic = true;
             Prawn.crushDamage.enabled = false;
             Prawn.UpdateCollidersForDocking(true);
+            //currentprawn.collisionModel.active = true;
             
-            
-            
+
 
             quickstep = Prawn;
 
@@ -173,7 +205,8 @@ namespace Beluga
                 hasStarted = true;
                 StartCoroutine(Prawndocking(Prawn, Prawntrigger, prawndocked, 1f, 1f));
             }
-            
+            Prawn.mainAnimator.SetBool("sit",true);
+            savedprawn.transform.SetParent(this.transform);
 
 
 
@@ -204,7 +237,7 @@ namespace Beluga
             Logger.Log("2");
             savedprawn.rotationDirty = true;
             Logger.Log("3");
-            savedprawn.liveMixin.shielded = true;
+            savedprawn.liveMixin.shielded = false;
             Logger.Log("4");
             savedprawn.useRigidbody.velocity = Vector3.zero;
             Logger.Log("5");
@@ -214,8 +247,11 @@ namespace Beluga
             Logger.Log("6");
             savedprawn.crushDamage.enabled = true;
             Logger.Log("7");
-            savedprawn.UpdateCollidersForDocking(true);
-
+            //savedprawn.mainAnimator.SetBool("sit", false);
+            savedprawn.UpdateCollidersForDocking(false);
+            
+            savedprawn.transform.SetParent(this.transform.parent);
+            //LargeWorldStreamer.main.cellManager.RegisterEntity(savedprawn.gameObject);
             UWE.CoroutineHost.StartCoroutine(EnterThenAddForceExosuit(new Vector3(0f, -10f, 0f)));
         }
         public IEnumerator MoveAndRotate(Vehicle objectToMove, Transform firstTarget, float duration)
@@ -298,6 +334,7 @@ namespace Beluga
 
             setCollidersBackDockDoors(false);
             savedprawn.UpdateCollidersForDocking(false);
+            //currentprawn.collisionModel.active = true;
             Logger.Log("8");
             
             savedprawn.useRigidbody.AddRelativeForce(force, ForceMode.VelocityChange);
@@ -354,14 +391,14 @@ namespace Beluga
             GetComponent<TetherSource>().isLive = false;
             InstantDockBackDoors(true);
             InstantHatchDoors(false);
-            savedseamoth = currentSeaMoth; currentSeaMoth = null;
+            savedprawn = currentprawn; currentprawn = null;
             detachflag = true;
             Logger.Log("1");
             //currentMount.collisionModel.SetActive(true);
             Logger.Log("2");
             savedprawn.rotationDirty = true;
             Logger.Log("3");
-            savedprawn.liveMixin.shielded = true;
+            savedprawn.liveMixin.shielded = false;
             Logger.Log("4");
             savedprawn.useRigidbody.velocity = Vector3.zero;
             Logger.Log("5");
@@ -369,18 +406,19 @@ namespace Beluga
             Logger.Log("6");
             savedprawn.crushDamage.enabled = true;
             Logger.Log("7");
-
+            
 
             BelugaUtils.PlayFMODSound("undock", savedprawn.transform);
 
             setCollidersBackDockDoors(false);
-            savedprawn.UpdateCollidersForDocking(false);
+            //savedprawn.UpdateCollidersForDocking(false);
+            currentprawn.collisionModel.active = true;
             Logger.Log("8");
             savedprawn.transform.position = Prawntrigger.transform.position;
             Vector3 force = new Vector3(0f, -30f, 0f);
             savedprawn.useRigidbody.AddRelativeForce(force, ForceMode.VelocityChange);
             setCollidersBackDockDoors(true);
-
+            savedprawn.transform.SetParent(this.transform.parent);
             currentprawn = null;
         }
     }

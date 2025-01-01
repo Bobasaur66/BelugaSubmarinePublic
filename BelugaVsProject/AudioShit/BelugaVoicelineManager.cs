@@ -65,7 +65,8 @@ namespace Beluga.AudioShit
             // health shit
             float liveCriticalThreshhold = 10f;
             float liveModerateThreshhold = 40f;
-            if (beluga.GetPercentageOfHealth() < liveCriticalThreshhold)
+            float health = beluga.GetPercentageOfHealth();
+            if (health < liveCriticalThreshhold)
             {
                 if (!liveAlreadyPassed)
                 {
@@ -73,7 +74,7 @@ namespace Beluga.AudioShit
                     AddVoicelineToQueue("DamageCritical");
                 }
             }
-            else if (beluga.GetPercentageOfHealth() < liveModerateThreshhold)
+            else if (health < liveModerateThreshhold)
             {
                 if (!liveLessAlreadyPassed)
                 {
@@ -93,8 +94,9 @@ namespace Beluga.AudioShit
             float energyLowThreshhold = 50f;
             float energyDepletingThreshhold = 25f;
             float energyCriticalThreshhold = 10f;
+            float power = beluga.GetPercentageOfPower();
 
-            if (beluga.GetPercentageOfPower() < 1)
+            if (power < 1)
             {
                 if (!energyZeroPassed)
                 {
@@ -103,7 +105,7 @@ namespace Beluga.AudioShit
                     
                 }
             }
-            else if (beluga.GetPercentageOfPower() < energyCriticalThreshhold)
+            else if (power < energyCriticalThreshhold)
             {
                 if (!energyCriticalPassed)
                 {
@@ -112,7 +114,7 @@ namespace Beluga.AudioShit
                 }
                 energyZeroPassed = false;
             }
-            else if (beluga.GetPercentageOfPower() < energyDepletingThreshhold)
+            else if (power < energyDepletingThreshhold)
             {
                 if (!energyDepletingPassed)
                 {
@@ -122,7 +124,7 @@ namespace Beluga.AudioShit
                 energyZeroPassed = false;
                 energyCriticalPassed = false;
             }
-            else if (beluga.GetPercentageOfPower() < energyLowThreshhold)
+            else if (power < energyLowThreshhold)
             {
                 if (!energyLowPassed)
                 {

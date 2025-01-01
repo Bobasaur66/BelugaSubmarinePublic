@@ -32,8 +32,8 @@ namespace Beluga.Commands
         }
         
 
-        [ConsoleCommand("testbeluga")]
-        public static void TestBeluga()
+        [ConsoleCommand("tpdeep")]
+        public static void TPDeep()
         {
             Vector3 teleportPos = new Vector3(-98, -13, 668);
             Quaternion teleportRot = Quaternion.Euler(new Vector3(0f, 0f, 90f));
@@ -41,8 +41,14 @@ namespace Beluga.Commands
             Player.main.transform.SetPositionAndRotation(teleportPos, teleportRot);
 
             BelugaUtils.NautilusBasicText("1 minute of swimming saved", 200f);
+        }
 
-            UWE.CoroutineHost.StartCoroutine(BelugaUtils.SpawnBeluga(false));
+        [ConsoleCommand("belugaload")]
+        public static void BelugaLoad()
+        {
+            Beluga beluga = Belugamanager.FindNearestBeluga(Player.main.transform.position);
+
+            beluga.GetComponent<BelugaDataLoader>().LoadData();
         }
     }
 }

@@ -35,6 +35,8 @@ namespace Beluga.Components
             {
                 if (Bottom != null)
                 {
+
+
                     Beluga.TeleportPlayer(Bottom.position);
 
                     //BelugaUtils.PlayFMODSound("ladderDown", Player.main.transform);
@@ -75,7 +77,7 @@ namespace Beluga.Components
             {
                 if (Top != null)
                 {
-                    
+
                     Beluga.TeleportPlayer(Top.position);
 
                     //BelugaUtils.PlayFMODSound("ladderUp", Player.main.transform);
@@ -100,6 +102,33 @@ namespace Beluga.Components
     }
 
 
+    public abstract class LadderBase : HandTarget
+    {
+        protected IEnumerator SmoothMoveToLadder(Transform playerTransform, Vector3 startPos, Vector3 firstTargetPos, Quaternion firstTargetRot, Vector3 finalTargetPos, Quaternion finalTargetRot, float duration = 0.5f)
+        {
+            // First, move to the starting position (Top or Bottom of the current ladder)
+            yield return SmoothMove(playerTransform, startPos, firstTargetPos, playerTransform.rotation, firstTargetRot, duration);
 
+            // Then, move to the final target position on the other ladder
+            yield return SmoothMove(playerTransform, firstTargetPos, finalTargetPos, firstTargetRot, finalTargetRot, duration);
+        }
 
+        protected IEnumerator SmoothMove(Transform playerTransform, Vector3 startPos, Vector3 endPos, Quaternion startRot, Quaternion endRot, float duration)
+        {
+            float elapsedTime = 0f;
+            while (elapsedTime < duration)
+            {
+                playerTransform.position = Vector3.Lerp(startPos, endPos, elapsedTime / duration);
+                playerTransform.rotation = Quaternion.Slerp(startRot, endRot, elapsedTime / duration);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            // Ensure final position and rotation are exact
+            playerTransform.position = endPos;
+            playerTransform.rotation = endRot;
+        }
+    }
 }
+
+    

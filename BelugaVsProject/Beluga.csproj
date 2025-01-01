@@ -14,6 +14,9 @@
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
   </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>12</LangVersion>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -115,18 +118,22 @@
     <Compile Include="AudioShit\VoicelinesInfo.cs" />
     <Compile Include="Beluga\Beluga.cs" />
     <Compile Include="Beluga\BelugaAnimations.cs" />
-    <Compile Include="Beluga\BelugaSaveDataHandler.cs" />
     <Compile Include="Beluga\Belugashield.cs" />
     <Compile Include="Beluga\BelugaSteeringwheel.cs" />
     <Compile Include="Beluga\Color.cs" />
+    <Compile Include="Beluga\Scanner.cs" />
     <Compile Include="Components\ThermalRepairer.cs" />
+    <Compile Include="Dockingcomponent\Dockingcomponent.cs" />
     <Compile Include="Patches\Compatabilitypatches\BloopBlazapatch.cs" />
     <Compile Include="Patches\Compatabilitypatches\Deextinctionpatch.cs" />
     <Compile Include="Patches\Compatabilitypatches\Silencepatch.cs" />
     <Compile Include="Patches\Patches\LeviathanDetectPatches.cs" />
     <Compile Include="Interfaces\ICyclopsReferencer.cs" />
+    <Compile Include="Patches\Patches\Miniworldpatch.cs" />
     <Compile Include="PilotingShenanigans\Belugacameras.cs" />
     <Compile Include="Beluga\BelugaDeath.cs" />
+    <Compile Include="RedPlagueUpgrade\PlagueSetup.cs" />
+    <Compile Include="RedPlagueUpgrade\PlagueUpgrade.cs" />
     <Compile Include="SaveData.cs" />
     <Compile Include="Upgrades\BelugaSpeedUpgradeModule.cs" />
     <Compile Include="Upgrades\BelugaThermalRepairModule.cs" />

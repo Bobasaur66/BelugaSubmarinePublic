@@ -196,14 +196,14 @@ namespace Beluga
         // just copied from vf
         public override void DrainPower(Vector3 moveDirection)
         {
-            float scalarFactor = 1f;
+            float scalarFactor = 0.5f;
             if (engineSpeed == 1)
             {
-                 scalarFactor = 0.5f;
+                 scalarFactor = 0.25f;
             }
             else if (engineSpeed == 3)
             {
-                scalarFactor = 4f;
+                scalarFactor = 2f;
             }
             float basePowerConsumptionPerSecond = moveDirection.x + moveDirection.y + moveDirection.z;
             float upgradeModifier = Mathf.Pow(0.85f, mv.numEfficiencyModules);

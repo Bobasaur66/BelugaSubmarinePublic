@@ -19,6 +19,10 @@ namespace Beluga
 
         public override void DestroyMV()
         {
+            if (isScuttled)
+            {
+                return;
+            }
             UWE.CoroutineHost.StartCoroutine(EpicDeathBehavior());
         }
         public void turnRed() 
@@ -27,6 +31,15 @@ namespace Beluga
             {
                 GetComponent<LightingController>().state = LightingController.LightingState.Operational;
                 Light.GetComponent<Light>().color = Color.red;
+
+            }
+        }
+        public void turnOffLights()
+        {
+            foreach (GameObject Light in UnityLights)
+            {
+                GetComponent<LightingController>().state = LightingController.LightingState.Damaged;
+                Light.SetActive(false);
 
             }
         }
@@ -155,6 +168,8 @@ namespace Beluga
             wreckedModel.SetActive(true);
 
             engineLight.SetActive(false);
+
+            turnOffLights();
 
             // sink
             worldForces.enabled = true;

@@ -751,32 +751,22 @@ namespace Beluga
 
         public float GetPercentageOfHealth()
         {
-            var liveMixin = gameObject.GetComponent<LiveMixin>();
+            float health;
+            float charge;
 
-            float result = liveMixin.health / MaxHealth * 100;
+            GetHUDValues(out health, out charge);
 
-            return result;
+            return health;
         }
 
         public float GetPercentageOfPower()
         {
-            var energyInterface = gameObject.GetComponent<EnergyInterface>();
+            float charge;
+            float capacity;
 
-            // all this shit is trying to remove a null ref error
-            if (energyInterface == null) return 100f;
-            if (energyInterface.sources[0] == null) return 100f;
-            if (energyInterface.sources[0].battery == null) return 100f;
+            GetEnergyValues(out charge, out capacity);
 
-            float totalCurrentEnergy = 0f;
-            float totalMaxEnergy = 0f;
-
-            foreach (var energyMixin in energyInterface.sources)
-            {
-                totalCurrentEnergy += energyMixin.battery.charge;
-                totalMaxEnergy += energyMixin.battery.capacity;
-            }
-
-            float result = totalCurrentEnergy / totalMaxEnergy * 100f;
+            float result = charge / capacity * 100f;
 
             return result;
         }

@@ -11,11 +11,15 @@ using UnityEngine;
 using VehicleFramework;
 using VehicleFramework.VehicleComponents;
 using Beluga.Components;
+using RootMotion.FinalIK;
+using JetBrains.Annotations;
+using Nautilus.Utility;
 
 namespace Beluga
 {
     public partial class Beluga
     {
+        
         public override void Start()
         {
             base.Start();
@@ -32,7 +36,7 @@ namespace Beluga
             Wheel.maxSteeringWheelAngle = 300f;
             
             SetupHandTargetShit();
-            
+            PlagueSetup();
             setupcams();
 
             AddPropCannonBeamStuff(false);
@@ -43,8 +47,14 @@ namespace Beluga
 
             disableshield();
 
-            unscrabbledocking();            
+            unscrabbledocking();
+            Mapsetup();
+
         }
+
+        
+        
+
 
 
         public void unscrabbledocking()
@@ -71,21 +81,19 @@ namespace Beluga
 
             model.EnsureComponent<BelugaVoicelineManager>();
 
-            model.EnsureComponent<BelugaSaveHandler>();
-
             model.FindChild("EngineSounds").EnsureComponent<BelugaEngineFMODEmitter>();
 
             TemperatureDamage tempdamg = model.EnsureComponent<TemperatureDamage>();
             tempdamg.minDamageTemperature = 1000f;
 
             DealDamageOnImpact ddoi = model.GetComponent<DealDamageOnImpact>();
-            ddoi.capMirrorDamage = 10f;
+            ddoi.capMirrorDamage = 15f;
             ddoi.mirroredSelfDamage = false;
             ddoi.mirroredSelfDamageFraction = 0.1f;
-            ddoi.minDamageInterval = 0.5f;
+            ddoi.minDamageInterval = 0.7f;
 
             ApplyMarmosetUBERShader(model);
-
+            
             BelugaSkyApplierAdder.AddSkyApplierComponents(model);
 
             BelugaSkyApplierManager belugaSkyApplierManager = model.GetComponent<BelugaSkyApplierManager>();
@@ -94,6 +102,8 @@ namespace Beluga
 
             var thing = Instantiate(Beluga);
             thing.gameObject.SetActive(false);
+
+            model.EnsureComponent<BelugaDataLoader>();
 
             UWE.CoroutineHost.StartCoroutine((Beluga as Beluga).DoCyclopsReferenceStuff());
         }
@@ -129,6 +139,9 @@ namespace Beluga
             var EngineSpeedFastTarget = transform.Find("UI/EngineSpeedFast").gameObject.EnsureComponent<EngineSpeedFastHandTarget>();
             var AgilityControl = transform.Find("UI/AgilityControl").gameObject.EnsureComponent<AgilityControlHandTarget>();
             var ShieldControl = transform.Find("UI/ShieldControl").gameObject.EnsureComponent<ShieldControlHandTarget>();
+
+            var tmprougui = Textstuff.GetComponent<TMPro.TMP_Text>();
+            tmprougui.font = Nautilus.Utility.FontUtils.Aller_Rg;
         }
 
         public void AddPropCannonBeamStuff (bool active)

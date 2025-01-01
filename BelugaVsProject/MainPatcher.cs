@@ -48,8 +48,8 @@ namespace Beluga
     }
 
 
-    [BepInPlugin("com.blizzard.subnautica.beluga.mod", "Beluga", "1.3.0")]
-    [BepInDependency("com.mikjaw.subnautica.vehicleframework.mod","1.3.3")]
+    [BepInPlugin("com.blizzard.subnautica.beluga.mod", "Beluga", "1.4.6")]
+    [BepInDependency("com.mikjaw.subnautica.vehicleframework.mod", "1.4.4")]
     [BepInDependency("com.snmodding.nautilus")]
     [BepInDependency("com.lee23.bloopandblaza", BepInDependency.DependencyFlags.SoftDependency)]
     [BepInDependency("com.aci.thesilence", BepInDependency.DependencyFlags.SoftDependency)]
@@ -59,7 +59,7 @@ namespace Beluga
     public class MainPatcher : BaseUnityPlugin
     {
         public static AssetBundle theUltimateBundleOfAssets;
-        public static SaveData save { get; private set; } = SaveDataHandler.RegisterSaveDataCache<SaveData>();
+        public static SaveData save { get; set; } = SaveDataHandler.RegisterSaveDataCache<SaveData>();
 
         public void Start()
         {
@@ -67,7 +67,9 @@ namespace Beluga
             var harmony = new Harmony("com.blizzard.subnautica.beluga.mod");
             harmony.PatchAll(typeof(SeaMothregisterpatch));
             harmony.PatchAll(typeof(Exosuitregisterpatch));
+            harmony.PatchAll(typeof(ExosuitUpdatepatch));
             harmony.PatchAll(typeof(LeviathanDetectPatches));
+            //harmony.PatchAll(typeof(MiniWorldPatches));
             CompPatch();
 
             // reference
@@ -95,17 +97,8 @@ namespace Beluga
             AddEncy();
 
             // save data stuff
-            RegisterSaveData();
-        }
-
-
-
-        public void RegisterSaveData()
-        {
-            save.OnStartedSaving += BelugaSaveHandler.OnStartedSaving();
-            save.OnFinishedSaving += BelugaSaveHandler.OnFinishedSaving();
-            save.OnStartedLoading += BelugaSaveHandler.OnStartedLoading();
-            save.OnFinishedLoading += BelugaSaveHandler.OnFinishedLoading();
+            save.OnStartedSaving += BelugaSaveHandler.OnStartedSaving;
+            save.OnFinishedLoading += BelugaSaveHandler.OnFinishedLoading;
         }
 
 
@@ -184,6 +177,7 @@ namespace Beluga
             };
             UpgradeTechTypes speedUTT = UpgradeRegistrar.RegisterUpgrade(new BelugaSpeedUpgradeModule(), compat);
             UpgradeTechTypes thermalUTT = UpgradeRegistrar.RegisterUpgrade(new BelugaThermalRepairModule(), compat);
+            //UpgradeTechTypes PlagueUTT = UpgradeRegistrar.RegisterUpgrade(new PlagueUpgrade(), compat);
         }
 
         public void AddEncy()

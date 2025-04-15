@@ -48,7 +48,7 @@ namespace Beluga
     }
 
 
-    [BepInPlugin("com.blizzard.subnautica.beluga.mod", "Beluga", "1.4.6")]
+    [BepInPlugin("com.blizzard.subnautica.beluga.mod", "Beluga", "1.4.7")]
     [BepInDependency("com.mikjaw.subnautica.vehicleframework.mod", "1.4.4")]
     [BepInDependency("com.snmodding.nautilus")]
     [BepInDependency("com.lee23.bloopandblaza", BepInDependency.DependencyFlags.SoftDependency)]
@@ -65,11 +65,12 @@ namespace Beluga
         {
             // patches
             var harmony = new Harmony("com.blizzard.subnautica.beluga.mod");
-            harmony.PatchAll(typeof(SeaMothregisterpatch));
-            harmony.PatchAll(typeof(Exosuitregisterpatch));
-            harmony.PatchAll(typeof(ExosuitUpdatepatch));
+            harmony.PatchAll(typeof(SeamothPatcher));
+            harmony.PatchAll(typeof(ExosuitPatcher));
             harmony.PatchAll(typeof(LeviathanDetectPatches));
-            //harmony.PatchAll(typeof(MiniWorldPatches));
+            harmony.PatchAll(typeof(MapRoomFunctionalityPatches));
+           
+            harmony.PatchAll(typeof(MiniWorldPatches));
             CompPatch();
 
             // reference
@@ -115,7 +116,7 @@ namespace Beluga
                 if (flag3)
                 {
                     var harmony = new Harmony("com.blizzard.patch");
-                    harmony.PatchAll(typeof(Silencepatcher)); // Apply the patch only if Somepatch is true
+                    harmony.PatchAll(typeof(SilencePatcher)); // Apply the patch only if Somepatch is true
                     Debug.Log("Silence Found Enabling");
                     
 
@@ -137,7 +138,7 @@ namespace Beluga
                 if (flag6)
                 {
                     var harmony = new Harmony("com.blizzard.patch");
-                    harmony.PatchAll(typeof(Blooppatch));
+                    harmony.PatchAll(typeof(BloopAndBlazaPatcher));
                     Debug.Log("com.lee23.bloopandblaza Found Enabling");
                 }
                 else
@@ -156,7 +157,7 @@ namespace Beluga
                 if (deFlag2)
                 {
                     var harmony = new Harmony("com.blizzard.patch");
-                    harmony.PatchAll(typeof(DeextinctionPatch));
+                    harmony.PatchAll(typeof(DeExtinctionPatcher));
                     Debug.Log("com.lee23.deextinction Found Enabling");
                 }
                 else

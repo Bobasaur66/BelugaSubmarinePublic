@@ -1,24 +1,17 @@
-﻿using BloopAndBlaza.Mono;
-using DeExtinction.Mono;
+﻿using DeExtinction.Mono;
 using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Beluga.Compatabilitypatches
 {
     [HarmonyPatch(typeof(GulperMeleeAttackMouth))]
-    class DeextinctionPatch
+    class DeExtinctionPatcher
     {
-
         [HarmonyPrefix]
-        [HarmonyPatch("OnTouch")]
-        public static bool OntouchPrefix(GulperMeleeAttackMouth __instance)
+        [HarmonyPatch(nameof(GulperMeleeAttackMouth.OnTouch))]
+        public static bool GulperMeleeAttackMouthOnTouchPrefix(GulperMeleeAttackMouth __instance, Collider collider)
         {
-            return false;
+            return collider.gameObject.GetComponent<Beluga>() == null;
         }
     }
 }

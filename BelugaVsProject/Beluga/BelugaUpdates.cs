@@ -27,16 +27,28 @@ namespace Beluga
         {
             base.Update();
 
-            prawndockupdate();
-            seamothdockupdate();
-
             CheckUIForActiveness();
             
             CheckHatchDistance();
 
             CheckEngineForEffects();
 
+            passiveenergyregeneration();
             gameObject.GetComponent<BelugaVoicelineManager>().CheckForVoicelines();
+        }
+
+        public void passiveenergyregeneration()
+        {
+            var belugaEngine = this.GetComponent<BelugaEngine>();
+            if (belugaEngine.engineActive) 
+            {
+                this.AddEnergy(0.0025f);
+               
+                    
+                    
+            }
+
+
         }
 
         public void CheckHatchDistance()

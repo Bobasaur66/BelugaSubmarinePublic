@@ -27,6 +27,8 @@ namespace Beluga.Upgrades
                 };
 
         public override Atlas.Sprite Icon => SpriteManager.Get(TechType.CyclopsThermalReactorModule);
+        public override bool IsVehicleSpecific => true;
+        public override List<CraftingNode> CraftingPath => CraftingNames.GetBelugaCraftingPath();
         public override void OnAdded(AddActionParams param)
         {
             if(param.vehicle as Beluga)

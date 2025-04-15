@@ -18,6 +18,10 @@ namespace Beluga
     {
         // dictionary of saved belugas (prefab id, data)
         public Dictionary<string, BelugaData> belugasSaved;
+
+        // first time voicelines
+        public bool craftVoiceline;
+        public bool agilityVoiceline;
     }
 
     public class BelugaData
@@ -41,6 +45,10 @@ namespace Beluga
             yield return new WaitForEndOfFrame();
             yield return new WaitForEndOfFrame();
             yield return new WaitForEndOfFrame();
+
+
+            Belugamanager.agilityflag = MainPatcher.save.agilityVoiceline;
+            Belugamanager.craftflag = MainPatcher.save.craftVoiceline;
 
             Debug.Log("1");
 
@@ -131,8 +139,27 @@ namespace Beluga
             MainPatcher.save.OnFinishedLoading -= OnFinishedLoading;
         }
 
-        internal static void OnStartedSaving(object? sender, JsonFileEventArgs args)
+        internal static void OnStartedSaving(object sender, JsonFileEventArgs args)
         {
+            try
+            {
+                OnStartedSavingInternal(sender, args);
+            }
+            catch(Exception e)
+            {
+                VehicleFramework.Logger.LogException("Failed to save Beluga Data!", e, true);
+            }
+        }
+        internal static void OnStartedSavingInternal(object sender, JsonFileEventArgs args)
+        {
+            if (sender == null)
+            {
+                return;
+            }
+            MainPatcher.save.agilityVoiceline = Belugamanager.agilityflag;
+            MainPatcher.save.craftVoiceline = Belugamanager.craftflag;
+
+
             if (Belugamanager.AllBeluga == null || Belugamanager.AllBeluga.Count == 0)
             {
                 Debug.Log("[Beluga] No belugas exist.");
@@ -184,8 +211,12 @@ namespace Beluga
             MainPatcher.save.belugasSaved = save;
         }
 
-        internal static void OnFinishedLoading(object? sender, JsonFileEventArgs args)
+        internal static void OnFinishedLoading(object sender, JsonFileEventArgs args)
         {
+            if(sender == null)
+            {
+                return;
+            }
             saveExists = true;
         }
     }

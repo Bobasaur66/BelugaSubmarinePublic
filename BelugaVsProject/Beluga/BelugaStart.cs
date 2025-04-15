@@ -14,27 +14,31 @@ using Beluga.Components;
 using RootMotion.FinalIK;
 using JetBrains.Annotations;
 using Nautilus.Utility;
+using Beluga.DockingBayComponent;
 
 namespace Beluga
 {
     public partial class Beluga
     {
-        
+        internal SeamothDockingBay seamothBay = null;
+        internal PrawnDockingBay prawnBay = null;
+        public override void Awake()
+        {
+            Mapsetup();
+            SetupMaterialReactor();
+            base.Awake();
+        }
         public override void Start()
         {
             base.Start();
 
-            Belugamanager.RegisterBeluga(this);
-
             // mute vehicle framework's voice and engine so we can add our own
             voice.balance = 0f;
             BelugaEngine engine = gameObject.GetComponent<BelugaEngine>();
-            
             engine.WhistleFactor = 0f;
             engine.HumFactor = 0f;
             VehicleFramework.VehicleComponents.SteeringWheel Wheel = Steeringwheel.EnsureComponent<SteeringWheel>();
             Wheel.maxSteeringWheelAngle = 300f;
-            
             SetupHandTargetShit();
             PlagueSetup();
             setupcams();
@@ -47,22 +51,21 @@ namespace Beluga
 
             disableshield();
 
-            unscrabbledocking();
-            Mapsetup();
 
+            seamothBay = gameObject.AddComponent<DockingBayComponent.SeamothDockingBay>();
+            prawnBay = gameObject.AddComponent<DockingBayComponent.PrawnDockingBay>();
         }
 
-        
-        
-
-
-
-        public void unscrabbledocking()
+        public void OnEnable()
         {
-            Prawnload = true;
-            seamothload = false;
-
+            Belugamanager.RegisterBeluga(this);
         }
+
+        public void OnDisable()
+        {
+            Belugamanager.DeregisterBeluga(this);
+        }
+        
 
         public static IEnumerator Register()
         {
@@ -99,20 +102,14 @@ namespace Beluga
             BelugaSkyApplierManager belugaSkyApplierManager = model.GetComponent<BelugaSkyApplierManager>();
 
             belugaSkyApplierManager.SetSkyApplierRenderers(model);
-
-            var thing = Instantiate(Beluga);
-            thing.gameObject.SetActive(false);
+            
+            // This Instantiate is necessary. Without it,
+            // lights and colliders are messed up. I don't know why.
+            Instantiate(Beluga).gameObject.SetActive(false);
 
             model.EnsureComponent<BelugaDataLoader>();
 
             UWE.CoroutineHost.StartCoroutine((Beluga as Beluga).DoCyclopsReferenceStuff());
-        }
-
-        public override void Awake()
-        {
-            base.Awake();
-
-            
         }
 
         public void SetupHandTargetShit()
@@ -129,7 +126,9 @@ namespace Beluga
             var Ladder10 = transform.Find("Ladders/Backright/Bottom").gameObject.EnsureComponent<LadderBottom>();
 
             var prawnhandtarget = transform.Find("Prawndock/prawndocked").gameObject.EnsureComponent<Prawnhandtarget>();
+            prawnhandtarget.beluga = this;
             var Seamothhandtarget = transform.Find("SeamothDock/seamothdocked").gameObject.EnsureComponent<SeaMothhandtarget>();
+            Seamothhandtarget.beluga = this;
 
             var InteriorLightsTarget = transform.Find("UI/InteriorLighting").gameObject.EnsureComponent<InteriorLightsHandTarget>();
             var ExteriorLightsTarget = transform.Find("UI/ExteriorLighting").gameObject.EnsureComponent<ExteriorLightsHandTarget>();

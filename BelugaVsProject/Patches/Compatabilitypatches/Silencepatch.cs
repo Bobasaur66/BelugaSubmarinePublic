@@ -1,38 +1,16 @@
 ﻿using CallOfTheVoid.Mono.Creatures.Silence;
 using HarmonyLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-
 
 namespace Beluga.Compatabilitypatches
 {
     [HarmonyPatch(typeof(SilenceSmallVehicleGrab))]
-    class Silencepatcher
+    class SilencePatcher
     {
-
         [HarmonyPrefix]
-        [HarmonyPatch("GrabVehicle")]
-        public static bool GrabPrefix(Vehicle vehicle)
+        [HarmonyPatch(nameof(SilenceSmallVehicleGrab.GrabVehicle))]
+        public static bool SilenceSmallVehicleGrabGrabVehiclePrefix(Vehicle vehicle)
         {
-            if (vehicle is Beluga)
-            {
-                
-
-
-                
-
-
-                return false;
-            }
-            return true;
+            return !(vehicle is Beluga);
         }
-        
-        
-        }
-            
     }
-
+}

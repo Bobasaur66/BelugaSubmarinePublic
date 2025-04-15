@@ -42,8 +42,9 @@ namespace Beluga
 
         public bool interiorLightsActive = false;
 
-        
-        
+        internal Exosuit currentprawn => prawnBay.currentDockedVehicle as Exosuit;
+        internal SeaMoth currentSeaMoth => seamothBay.currentDockedVehicle as SeaMoth;
+
         public static void GetAssets()
         {
             model = MainPatcher.theUltimateBundleOfAssets.LoadAsset<GameObject>("BelugaVehicle");

@@ -23,6 +23,7 @@ namespace Beluga
                     if (beluga.GetComponent<LightingController>().state == LightingController.LightingState.Operational)
                     {
                         beluga.GetComponent<LightingController>().state = LightingController.LightingState.Damaged;
+                    
                         BelugaUtils.PlayFMODSound("buttonon", Player.main.transform);
                     }
                     else if (beluga.GetComponent<LightingController>().state == LightingController.LightingState.Damaged)
@@ -61,7 +62,7 @@ namespace Beluga
 
             if (GameInput.GetButtonDown(GameInput.Button.LeftHand))
             {
-                beluga.GetComponent<HeadLightsController>().ToggleHeadlights();
+                beluga.GetComponent<HeadLightsController>().Toggle();
             }
         }
 

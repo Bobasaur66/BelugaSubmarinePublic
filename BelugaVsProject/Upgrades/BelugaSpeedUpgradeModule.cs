@@ -25,7 +25,8 @@ namespace Beluga.Upgrades
                     new Ingredient(TechType.PrecursorIonCrystal, 4),
                     new Ingredient(TechType.PrecursorIonBattery, 2)
                 };
-
+        public override bool IsVehicleSpecific => true;
+        public override List<CraftingNode> CraftingPath => CraftingNames.GetBelugaCraftingPath();
         public override Atlas.Sprite Icon => SpriteManager.Get(TechType.PowerUpgradeModule);
         public override void OnAdded(AddActionParams param)
         {

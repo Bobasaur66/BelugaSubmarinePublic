@@ -93,7 +93,7 @@ namespace Beluga
 
 
         }
-
+         
         public override void PaintVehicleName(string name, Color nameColor, Color hullColor)
         {
             var tmprougui = Textstuff.GetComponent<TMPro.TMP_Text>();

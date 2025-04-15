@@ -56,8 +56,8 @@ namespace Beluga
 
             yield return gameObject.GetComponent<BelugaEngine>().RollOverTime(targetRoll, voicelineLength);
 
-            TryDetachPrawnWithoutPlayer();
-            TryDetachSeamothWithoutPlayer();
+            seamothBay.Detach(false);
+            prawnBay.Detach(false);
 
             BelugaUtils.PlayFMODSound("explode", transform);
 
@@ -106,6 +106,7 @@ namespace Beluga
             worldForces.underwaterGravity = 4f;
 
             vfxcontroller.StopAndDestroy(0, 1f);
+            minimap.GetComponent<MiniWorld>().DisableMap();
         }
 
         private IEnumerator waitWhileDestabilizingRoll(float time)
@@ -146,8 +147,8 @@ namespace Beluga
         {
             stabilizeRoll = false;
 
-            TryDetachPrawnWithoutPlayer();
-            TryDetachSeamothWithoutPlayer();
+            seamothBay.Detach(false);
+            prawnBay.Detach(false);
 
             engineSoundEmitter.engineOn = false;
 

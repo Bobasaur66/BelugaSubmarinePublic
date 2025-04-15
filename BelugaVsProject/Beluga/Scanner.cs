@@ -36,35 +36,65 @@ namespace Beluga
                 return transform.Find("Minimap");
             }
         }
+
         public void Mapsetup()
         {
-            Logger.Log("Kaaaaarl");
-            
-            this.gameObject.AddComponent<MiniWorld>();
-            MiniWorld Karl = this.gameObject.GetComponent<MiniWorld>();
-            Karl.hologramHolder = minimap.transform;
+            if (minimap == null)
+            {
+                Logger.Log("Mapsetup Error: Minimap transform not found!");
+                return;
+            }
+
+            minimap.gameObject.AddComponent<MiniWorld>();
+            MiniWorld Karl = minimap.gameObject.GetComponent<MiniWorld>();
+
+            if (Karl == null)
+            {
+                Logger.Log("Mapsetup Error: Failed to add MiniWorld component!");
+                return;
+            }
+
+            Karl.hologramHolder = minimap;
             Karl.hologramObject = minimap.gameObject;
             Karl.hologramRadius = 12;
-            Karl.mapWorldRadius = 10;
+            Karl.mapWorldRadius = 100;
+            Karl.fadeRadius = 1.8f;
+            Karl.fadeSharpness = 5;
 
-            Karl.hologramMaterial = MaterialUtils.GhostMaterial;
-            Material minimat = MaterialUtils.GhostMaterial;
-            Karl.materialInstance = minimat;
-            if (Karl == null) { Logger.Log("Kaaaaarl is deaaaad nooooo"); };
-           // Karl.transform.position = this.transform.position;
-            //Karl.transform.parent = this.transform;
-            //Karl.materialInstance = MaterialUtils.GhostMaterial;
-            Karl.EnableMap();
-            Karl.InitializeHologram();
+            if (MaterialUtils.HolographicUIMaterial == null)
+            {
+                Logger.Log("Mapsetup Error: GhostMaterial is null!");
+                return;
+            }
+
+            // The HolographicUIMaterial makes the minimap invisible.
+            //Material mat = MaterialUtils.HolographicUIMaterial;
+            Material mat = MaterialUtils.GhostMaterial;
 
 
+            Karl.hologramMaterial = mat;
+            Karl.materialInstance = mat;
 
+            MapRoomFunctionality MapC = gameObject.EnsureComponent<MapRoomFunctionality>();
 
+            if (MapC == null)
+            {
+                Logger.Log("Mapsetup Error: Failed to add MapRoomFunctionality component!");
+                return;
+            }
+
+            MapC.wireFrameWorld = minimap;
+            MapC.worlddisplay = minimap.gameObject;
+            MapC.miniWorld = Karl;
+
+            MapC.powerConsumer = gameObject.EnsureComponent<PowerConsumer>();
+            if (MapC.powerConsumer == null)
+            {
+                Logger.Log("Mapsetup Error: PowerConsumer component is missing!");
+                return;
+            }
+
+            Logger.Log("Mapsetup completed successfully.");
         }
-        
-
-
-
-
     }
 }

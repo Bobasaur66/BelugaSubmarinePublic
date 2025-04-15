@@ -89,7 +89,7 @@ namespace Beluga
             }
 
             // exterior lighting
-            if (beluga.GetComponent<HeadLightsController>().isHeadlightsOn)
+            if (beluga.GetComponent<HeadLightsController>().IsLightsOn)
             {
                 UIExteriorLightsOn.SetActive(true);
                 UIExteriorLightsOff.SetActive(false);

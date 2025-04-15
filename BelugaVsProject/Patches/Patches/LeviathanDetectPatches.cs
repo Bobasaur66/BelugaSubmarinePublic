@@ -1,26 +1,19 @@
 ﻿using Beluga.AudioShit;
 using HarmonyLib;
 using Nautilus.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using VehicleFramework;
 
 namespace Beluga.Patches.Patches
 {
     [HarmonyPatch(typeof(Creature))]
-    [HarmonyPatch("ChooseBestAction")]
+    [HarmonyPatch(nameof(Creature.ChooseBestAction))]
     public class LeviathanDetectPatches
     {
         [HarmonyPostfix]
         public static void Postfix(Creature __instance)
         {
             Beluga beluga = Player.main.GetVehicle() as Beluga;
-
-            float distanceThreshhold = 200f;
+            const float distanceThreshhold = 200f;
 
             if (!beluga) return;
             
@@ -28,7 +21,6 @@ namespace Beluga.Patches.Patches
             if (dist > distanceThreshhold) return;
 
             string inst = __instance.name.TrimClone().ToLower();
-
             bool flag = false;
 
             if (inst.Contains("leviathan")) flag = true;

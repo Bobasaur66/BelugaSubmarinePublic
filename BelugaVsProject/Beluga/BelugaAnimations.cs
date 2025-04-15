@@ -27,27 +27,22 @@ namespace Beluga
         public Quaternion hatchDoorsClosedRotation = Quaternion.Euler(270f, 0f, 0f);
 
         public Coroutine hatchDoorsCoroutine;
-
         public void AnimateHatchDoors()
         {
             // if dead don't
             if (isScuttled) return;
 
-
-            Beluga thisBeluga = Belugamanager.FindNearestBeluga(Player.main.transform.position);
-
-            if (thisBeluga.targetHatchDoors != thisBeluga.hatchDoorsOpen)
+            if (targetHatchDoors != hatchDoorsOpen)
             {
-                thisBeluga.hatchDoorsOpen = thisBeluga.targetHatchDoors;
+                hatchDoorsOpen = targetHatchDoors;
 
-                if (thisBeluga.hatchDoorsCoroutine != null)
+                if (hatchDoorsCoroutine != null)
                 {
-                    UWE.CoroutineHost.StopCoroutine(thisBeluga.hatchDoorsCoroutine);
+                    UWE.CoroutineHost.StopCoroutine(hatchDoorsCoroutine);
                 }
-                thisBeluga.hatchDoorsCoroutine = UWE.CoroutineHost.StartCoroutine(thisBeluga.RotateHatchDoors(thisBeluga.hatchDoorsOpen));
+                hatchDoorsCoroutine = UWE.CoroutineHost.StartCoroutine(RotateHatchDoors(hatchDoorsOpen));
             }
         }
-
         public IEnumerator RotateHatchDoors(bool open)
         {
             Quaternion targetRotationRight = open ? hatchDoorRightOpenRotation : hatchDoorsClosedRotation;
@@ -81,24 +76,17 @@ namespace Beluga
             hatchDoorRight.transform.localRotation = targetRotationRight;
             hatchDoorLeft.transform.localRotation = targetRotationLeft;
         }
-
         public void InstantHatchDoors(bool open)
         {
-            Beluga thisBeluga = Belugamanager.FindNearestBeluga(Player.main.transform.position);
+            Quaternion targetRotationRight = open ? hatchDoorRightOpenRotation : hatchDoorsClosedRotation;
+            Quaternion targetRotationLeft = open ? hatchDoorLeftOpenRotation : hatchDoorsClosedRotation;
 
-            Quaternion targetRotationRight = open ? thisBeluga.hatchDoorRightOpenRotation : thisBeluga.hatchDoorsClosedRotation;
-            Quaternion targetRotationLeft = open ? thisBeluga.hatchDoorLeftOpenRotation : thisBeluga.hatchDoorsClosedRotation;
+            hatchDoorRight.transform.localRotation = targetRotationRight;
+            hatchDoorLeft.transform.localRotation = targetRotationLeft;
 
-            thisBeluga.hatchDoorRight.transform.localRotation = targetRotationRight;
-            thisBeluga.hatchDoorLeft.transform.localRotation = targetRotationLeft;
-
-            thisBeluga.targetHatchDoors = open;
-            thisBeluga.hatchDoorsOpen = open;
+            targetHatchDoors = open;
+            hatchDoorsOpen = open;
         }
-
-
-
-
 
         // front dock doors
 
@@ -122,21 +110,17 @@ namespace Beluga
             // if dead don't
             if (isScuttled) return;
 
-
-            Beluga thisBeluga = Belugamanager.FindNearestBeluga(Player.main.transform.position);
-
-            if (thisBeluga.targetDockFrontDoors != thisBeluga.dockFrontDoorsOpen)
+            if (targetDockFrontDoors != dockFrontDoorsOpen)
             {
-                thisBeluga.dockFrontDoorsOpen = !thisBeluga.dockFrontDoorsOpen;
+                dockFrontDoorsOpen = !dockFrontDoorsOpen;
 
-                if (thisBeluga.dockFrontDoorsCoroutine != null)
+                if (dockFrontDoorsCoroutine != null)
                 {
-                    UWE.CoroutineHost.StopCoroutine(thisBeluga.dockFrontDoorsCoroutine);
+                    UWE.CoroutineHost.StopCoroutine(dockFrontDoorsCoroutine);
                 }
-                thisBeluga.dockFrontDoorsCoroutine = UWE.CoroutineHost.StartCoroutine(thisBeluga.RotateDockFrontDoors(thisBeluga.dockFrontDoorsOpen));
+                dockFrontDoorsCoroutine = UWE.CoroutineHost.StartCoroutine(RotateDockFrontDoors(dockFrontDoorsOpen));
             }
         }
-
         public IEnumerator RotateDockFrontDoors(bool open)
         {
             Quaternion targetRotationRight = open ? dockFrontDoorRightOpenRotation : dockFrontDoorsClosedRotation;
@@ -174,41 +158,26 @@ namespace Beluga
             dockFrontDoorLeftInt.transform.localRotation = targetRotationLeft;
             dockFrontDoorLeftExt.transform.localRotation = targetRotationLeft;
         }
-
         public void InstantDockFrontDoors(bool open)
         {
-            Beluga thisBeluga = Belugamanager.FindNearestBeluga(Player.main.transform.position);
+            Quaternion targetRotationRight = open ? dockFrontDoorRightOpenRotation : dockFrontDoorsClosedRotation;
+            Quaternion targetRotationLeft = open ? dockFrontDoorLeftOpenRotation : dockFrontDoorsClosedRotation;
 
-            Quaternion targetRotationRight = open ? thisBeluga.dockFrontDoorRightOpenRotation : thisBeluga.dockFrontDoorsClosedRotation;
-            Quaternion targetRotationLeft = open ? thisBeluga.dockFrontDoorLeftOpenRotation : thisBeluga.dockFrontDoorsClosedRotation;
+            dockFrontDoorRightInt.transform.localRotation = targetRotationRight;
+            dockFrontDoorLeftInt.transform.localRotation = targetRotationLeft;
+            dockFrontDoorRightExt.transform.localRotation = targetRotationRight;
+            dockFrontDoorLeftExt.transform.localRotation = targetRotationLeft;
 
-            thisBeluga.dockFrontDoorRightInt.transform.localRotation = targetRotationRight;
-            thisBeluga.dockFrontDoorLeftInt.transform.localRotation = targetRotationLeft;
-            thisBeluga.dockFrontDoorRightExt.transform.localRotation = targetRotationRight;
-            thisBeluga.dockFrontDoorLeftExt.transform.localRotation = targetRotationLeft;
-
-            thisBeluga.targetDockFrontDoors = open;
-            thisBeluga.dockFrontDoorsOpen = open;
+            targetDockFrontDoors = open;
+            dockFrontDoorsOpen = open;
         }
-
         public void setCollidersFrontDockDoors(bool active)
         {
-            Beluga thisBeluga = Belugamanager.FindNearestBeluga(Player.main.transform.position);
-
-            thisBeluga.dockFrontDoorLeftExt.FindChild("Collider").SetActive(active);
-            thisBeluga.dockFrontDoorRightExt.FindChild("Collider").SetActive(active);
+            dockFrontDoorLeftExt.FindChild("Collider").SetActive(active);
+            dockFrontDoorRightExt.FindChild("Collider").SetActive(active);
         }
 
-
-
-
-
-
-
-
-
         // back dock doors
-
         public bool dockBackDoorsOpen = false;
         public bool targetDockBackDoors = false;
         public float dockBackDoorsDuration = 0.5f;
@@ -223,27 +192,23 @@ namespace Beluga
         public Quaternion dockBackDoorsClosedRotation = Quaternion.Euler(270f, 0f, 0f);
 
         public Coroutine dockBackDoorsCoroutine;
-
         public void AnimateDockBackDoors()
         {
             // if dead don't
             if (isScuttled) return;
 
 
-            Beluga thisBeluga = Belugamanager.FindNearestBeluga(Player.main.transform.position);
-
-            if (thisBeluga.targetDockBackDoors != thisBeluga.dockBackDoorsOpen)
+            if (targetDockBackDoors != dockBackDoorsOpen)
             {
-                thisBeluga.dockBackDoorsOpen = !thisBeluga.dockBackDoorsOpen;
+                dockBackDoorsOpen = !dockBackDoorsOpen;
 
-                if (thisBeluga.dockBackDoorsCoroutine != null)
+                if (dockBackDoorsCoroutine != null)
                 {
-                    UWE.CoroutineHost.StopCoroutine(thisBeluga.dockBackDoorsCoroutine);
+                    UWE.CoroutineHost.StopCoroutine(dockBackDoorsCoroutine);
                 }
-                thisBeluga.dockBackDoorsCoroutine = UWE.CoroutineHost.StartCoroutine(thisBeluga.RotateDockBackDoors(thisBeluga.dockBackDoorsOpen));
+                dockBackDoorsCoroutine = UWE.CoroutineHost.StartCoroutine(RotateDockBackDoors(dockBackDoorsOpen));
             }
         }
-
         public IEnumerator RotateDockBackDoors(bool open)
         {
             Quaternion targetRotationRight = open ? dockBackDoorRightOpenRotation : dockBackDoorsClosedRotation;
@@ -281,34 +246,24 @@ namespace Beluga
             dockBackDoorLeftInt.transform.localRotation = targetRotationLeft;
             dockBackDoorLeftExt.transform.localRotation = targetRotationLeft;
         }
-
         public void InstantDockBackDoors(bool open)
         {
-            Beluga thisBeluga = Belugamanager.FindNearestBeluga(Player.main.transform.position);
+            Quaternion targetRotationRight = open ? dockBackDoorRightOpenRotation : dockBackDoorsClosedRotation;
+            Quaternion targetRotationLeft = open ? dockBackDoorLeftOpenRotation : dockBackDoorsClosedRotation;
 
-            Quaternion targetRotationRight = open ? thisBeluga.dockBackDoorRightOpenRotation : thisBeluga.dockBackDoorsClosedRotation;
-            Quaternion targetRotationLeft = open ? thisBeluga.dockBackDoorLeftOpenRotation : thisBeluga.dockBackDoorsClosedRotation;
+            dockBackDoorRightInt.transform.localRotation = targetRotationRight;
+            dockBackDoorLeftInt.transform.localRotation = targetRotationLeft;
+            dockBackDoorRightExt.transform.localRotation = targetRotationRight;
+            dockBackDoorLeftExt.transform.localRotation = targetRotationLeft;
 
-            thisBeluga.dockBackDoorRightInt.transform.localRotation = targetRotationRight;
-            thisBeluga.dockBackDoorLeftInt.transform.localRotation = targetRotationLeft;
-            thisBeluga.dockBackDoorRightExt.transform.localRotation = targetRotationRight;
-            thisBeluga.dockBackDoorLeftExt.transform.localRotation = targetRotationLeft;
-
-            thisBeluga.targetDockBackDoors = open;
-            thisBeluga.dockBackDoorsOpen = open;
+            targetDockBackDoors = open;
+            dockBackDoorsOpen = open;
         }
-
         public void setCollidersBackDockDoors(bool active)
         {
-            Beluga thisBeluga = Belugamanager.FindNearestBeluga(Player.main.transform.position);
-
-            thisBeluga.dockBackDoorLeftExt.FindChild("Collider").SetActive(active);
-            thisBeluga.dockBackDoorRightExt.FindChild("Collider").SetActive(active);
+            dockBackDoorLeftExt.FindChild("Collider").SetActive(active);
+            dockBackDoorRightExt.FindChild("Collider").SetActive(active);
         }
-
-
-
-
 
         // engine rotation
         public void RotateEngine(bool rotate)

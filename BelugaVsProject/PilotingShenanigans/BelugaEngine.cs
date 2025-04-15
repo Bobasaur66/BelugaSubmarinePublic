@@ -89,9 +89,6 @@ namespace Beluga
         protected override float STRAFE_ACCEL => STRAFE_MAX_SPEED / 4f;
         protected override float VERT_ACCEL => VERT_MAX_SPEED / 4f;
 
-        public override bool CanMoveAboveWater => false;
-        public override bool CanRotateAboveWater => false;
-
 
         // agility stuff
         public GameObject canvas;
@@ -235,15 +232,8 @@ namespace Beluga
             }
             else
             {
-                
-                if (GameInput.GetButtonHeld(GameInput.Button.MoveRight))
-                {
-                    turnSpeedX += turnSpeedAccelX * Time.deltaTime;
-                }
-                if (GameInput.GetButtonHeld(GameInput.Button.MoveLeft))
-                {
-                    turnSpeedX -= turnSpeedAccelX * Time.deltaTime;
-                }
+                float moveX = GameInput.GetMoveDirection().x;
+                turnSpeedX += moveX * turnSpeedAccelX * Time.deltaTime;
                 turnSpeedX = Mathf.Clamp(turnSpeedX, -turnSpeedMaxX * sensitivityX, turnSpeedMaxX * sensitivityX);
 
                 // drag on turn speed
